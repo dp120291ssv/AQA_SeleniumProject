@@ -1,38 +1,37 @@
 package pages.telecommunication;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.base.BasePage;
 
+import static com.codeborne.selenide.Selenide.$x;
+
 public class MobilePhoneReplenishment extends BasePage {
 
-	public MobilePhoneReplenishment(WebDriver driver) {
-		super(driver);
-	}
-
-	private final By inputPhoneNumber = By.xpath("//input[@data-qa-node='phone-number']");
-	private final By inputAmount = By.xpath("//input[@data-qa-node='amount']");
-	private final By inputCardNumber = By.xpath("//input[@data-qa-node='numberdebitSource']");
-	private final By inputCardExpDate = By.xpath("//input[@data-qa-node='expiredebitSource']");
-	private final By inputCardCvv = By.xpath("//input[@data-qa-node='cvvdebitSource']");
-	private final By buttonSubmitPayment = By.xpath("//button[@data-qa-node='submit']");
-	private final By cardNumberInTheCart = By.xpath("//td[@data-qa-node='card']");
-	private final By recipientNameInTheCart = By.xpath("//span[@data-qa-node='nameB']");
-	private final By amountInTheCart = By.xpath("//span[@data-qa-node='amount']");
-	private final By commissionInTheCart = By.xpath("//span[@data-qa-node='commission']");
-	private final By amountCurrencyInTheCard = By.xpath("//small[@data-qa-node='currency']");
-	private final By commissionCurrencyInTheCard = By.xpath("//small[@data-qa-node='commission-currency']");
-	private final By walletButton = By.xpath("//div[@data-qa-node='debitSourceSource']");
+	private final SelenideElement inputPhoneNumber = $x("//input[@data-qa-node='phone-number']");
+	private final SelenideElement inputAmount = $x("//input[@data-qa-node='amount']");
+	private final SelenideElement inputCardNumber = $x("//input[@data-qa-node='numberdebitSource']");
+	private final SelenideElement inputCardExpDate = $x("//input[@data-qa-node='expiredebitSource']");
+	private final SelenideElement inputCardCvv = $x("//input[@data-qa-node='cvvdebitSource']");
+	private final SelenideElement buttonSubmitPayment = $x("//button[@data-qa-node='submit']");
+	private final SelenideElement cardNumberInTheCart = $x("//td[@data-qa-node='card']");
+	private final SelenideElement recipientNameInTheCart = $x("//span[@data-qa-node='nameB']");
+	private final SelenideElement amountInTheCart = $x("//span[@data-qa-node='amount']");
+	private final SelenideElement commissionInTheCart = $x("//span[@data-qa-node='commission']");
+	private final SelenideElement amountCurrencyInTheCard = $x("//small[@data-qa-node='currency']");
+	private final SelenideElement commissionCurrencyInTheCard = $x("//small[@data-qa-node='commission-currency']");
+	private final SelenideElement walletButton = $x("//div[@data-qa-node='debitSourceSource']");
 
 	/**
 	 * Enter a phone number excluding country code
 	 * @param phone phone number
 	 */
 	public MobilePhoneReplenishment enterPhoneNumber(String phone){
-		WebElement phoneNumber = driver.findElement(inputPhoneNumber);
-		clearAndType(phoneNumber, phone);
+		clearAndType(inputPhoneNumber, phone);
 		return this;
 	}
 
@@ -41,8 +40,7 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param sum amount of replenishment
 	 */
 	public MobilePhoneReplenishment enterAmount(String sum){
-		WebElement amount = driver.findElement(inputAmount);
-		clearAndType(amount, sum);
+		clearAndType(inputAmount, sum);
 		return this;
 	}
 
@@ -51,8 +49,7 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param number card number
 	 */
 	public MobilePhoneReplenishment enterCardNumber(String number){
-		WebElement cardNumber = driver.findElement(inputCardNumber);
-		clearAndType(cardNumber, number);
+		clearAndType(inputCardNumber, number);
 		return this;
 	}
 
@@ -61,8 +58,7 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param expDate expiry date
 	 */
 	public MobilePhoneReplenishment enterExpDate(String expDate){
-		WebElement expiredDate = driver.findElement(inputCardExpDate);
-		clearAndType(expiredDate, expDate);
+		clearAndType(inputCardExpDate, expDate);
 		return this;
 	}
 
@@ -71,8 +67,7 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param cvv the cvv code
 	 */
 	public MobilePhoneReplenishment enterCvvCode(String cvv){
-		WebElement cvvCode = driver.findElement(inputCardCvv);
-		clearAndType(cvvCode, cvv);
+		clearAndType(inputCardCvv, cvv);
 		return this;
 	}
 
@@ -80,7 +75,7 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * Acceptance of payment
 	 */
 	public MobilePhoneReplenishment submitMobileReplenishment(){
-		driver.findElement(buttonSubmitPayment).click();
+		buttonSubmitPayment.shouldBe(Condition.visible).click();
 		return this;
 	}
 
@@ -88,7 +83,7 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * Choose a card from the wallet
 	 */
 	public MobilePhoneReplenishment selectCardFromWallet(){
-		driver.findElement(walletButton).click();
+		walletButton.shouldBe(Condition.visible).click();
 		return this;
 	}
 
@@ -98,8 +93,8 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param recipient mobile operator
 	 */
 	public MobilePhoneReplenishment checkPaymentCardAndRecipient(String cardFrom, String recipient){
-		Assertions.assertEquals(driver.findElement(cardNumberInTheCart).getText().split(" ")[3], cardFrom);
-		Assertions.assertEquals(driver.findElement(recipientNameInTheCart).getText(), recipient);
+		Assertions.assertEquals(cardNumberInTheCart.getText().split(" ")[3], cardFrom);
+		Assertions.assertEquals(recipientNameInTheCart.getText(), recipient);
 		return this;
 	}
 

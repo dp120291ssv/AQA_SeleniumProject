@@ -1,30 +1,28 @@
 package pages.loans;
 
-import org.openqa.selenium.*;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import pages.base.BasePage;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class CarLoans extends BasePage{
 
-	public CarLoans(WebDriver driver) {
-		super(driver);
-	}
-
-	private final By agreementsTab = By.xpath("//div[contains(text(), 'Agreements') and .//parent::a[@href='/auto-credit/my']]");
-	private final By amountFieldCarCost = By.xpath("//input[@data-qa-node='amount']");
-	private final By amountFieldPrepaidExpense = By.xpath("//input[@data-qa-node='prepaid']");
-	private final By phoneCodeButton = By.xpath("//button[@data-qa-node='phone-code']");
-	private final By searchPhoneCodeField = By.xpath("//input[@placeholder = 'Search' and .//ancestor::div[@data-qa-node]]");
-	private final By phoneNumberField = By.xpath("//input[@data-qa-node = 'phone-number' and @placeholder = '000000000']");
-	private final By applyOrderButton = By.xpath("//button[@type = 'button' and contains(text(), 'Submit an application')]");
-	private final By selectedUsedAutoTab = By.xpath("//div[@data-qa-node='type' and contains(text(), 'With mileage')]");
-	private final By confirmForm = By.xpath("//div[contains(text(), 'One-time password has been forwarded to your phone')]");
-	private final By buttonCountryRussia = By.xpath("//div[@name='Russia']");
+	private final SelenideElement agreementsTab = $x("//div[contains(text(), 'Agreements') and .//parent::a[@href='/auto-credit/my']]");
+	private final SelenideElement amountFieldCarCost = $x("//input[@data-qa-node='amount']");
+	private final SelenideElement amountFieldPrepaidExpense = $x("//input[@data-qa-node='prepaid']");
+	private final SelenideElement phoneCodeButton = $x("//button[@data-qa-node='phone-code']");
+	private final SelenideElement searchPhoneCodeField = $x("//input[@placeholder = 'Search' and .//ancestor::div[@data-qa-node]]");
+	private final SelenideElement phoneNumberField = $x("//input[@data-qa-node = 'phone-number' and @placeholder = '000000000']");
+	private final SelenideElement applyOrderButton = $x("//button[@type = 'button' and contains(text(), 'Submit an application')]");
+	private final SelenideElement selectedUsedAutoTab = $x("//div[@data-qa-node='type' and contains(text(), 'With mileage')]");
+	private final SelenideElement confirmForm = $x("//div[contains(text(), 'One-time password has been forwarded to your phone')]");
+	private final SelenideElement buttonCountryRussia = $x("//div[@name='Russia']");
 
 	/**
 	 * Selecting a tab agreements
 	 */
 	public CarLoans selectAgreementsTab(){
-		driver.findElement(agreementsTab).click();
+		agreementsTab.shouldBe(Condition.visible);
 		return this;
 	}
 
@@ -32,7 +30,7 @@ public class CarLoans extends BasePage{
 	 * Test display of the form confirmation of transaction
 	 */
 	public CarLoans checkIsDisplayedConfirm(){
-		waitElementIsVisible(driver.findElement(confirmForm));
+		confirmForm.shouldBe(Condition.visible);
 		return this;
 	}
 
@@ -41,8 +39,7 @@ public class CarLoans extends BasePage{
 	 * @param amount the full cost of a car
 	 */
 	public CarLoans enterAmountFieldCarCost(String amount) {
-		WebElement amountField = driver.findElement(amountFieldCarCost);
-		clearAndType(amountField, amount);
+		clearAndType(amountFieldCarCost, amount);
 		return this;
 	}
 
@@ -51,8 +48,7 @@ public class CarLoans extends BasePage{
 	 * @param amount the amount of the advance payment
 	 */
 	public CarLoans enterAmountFieldPrepaidExpense(String amount) {
-		WebElement amountField = driver.findElement(amountFieldPrepaidExpense);
-		clearAndType(amountField, amount);
+		clearAndType(amountFieldPrepaidExpense, amount);
 		return this;
 	}
 
@@ -61,8 +57,7 @@ public class CarLoans extends BasePage{
 	 * @param phoneNumber mobile number to apply
 	 */
 	public CarLoans enterPhoneNumber(String phoneNumber) {
-		driver.findElement(phoneNumberField).clear();
-		driver.findElement(phoneNumberField).sendKeys(phoneNumber);
+		clearAndType(phoneNumberField, phoneNumber);
 		return this;
 	}
 
@@ -71,8 +66,7 @@ public class CarLoans extends BasePage{
 	 * @param phoneNumber mobile number to apply
 	 */
 	public CarLoans searchPhoneCountryCodeField(String phoneNumber) {
-		driver.findElement(searchPhoneCodeField).clear();
-		driver.findElement(searchPhoneCodeField).sendKeys(phoneNumber);
+		clearAndType(searchPhoneCodeField, phoneNumber);
 		return this;
 	}
 
@@ -80,7 +74,7 @@ public class CarLoans extends BasePage{
 	 * Selection of drop down list of codes of countries, mobile communications
 	 */
 	public CarLoans selectPhoneCodeButton() {
-		driver.findElement(phoneCodeButton).click();
+		phoneCodeButton.shouldBe(Condition.visible).click();
 		return this;
 	}
 
@@ -88,7 +82,7 @@ public class CarLoans extends BasePage{
 	 * Confirmation of application for credit
 	 */
 	public CarLoans submitOrderButton() {
-		driver.findElement(applyOrderButton).click();
+		applyOrderButton.shouldBe(Condition.visible).click();
 		return this;
 	}
 
@@ -96,7 +90,7 @@ public class CarLoans extends BasePage{
 	 * Check that the selected tab is "With mileage"
 	 */
 	public CarLoans checkSelectedTabWithMileageAuto() {
-		waitElementIsVisible(driver.findElement(selectedUsedAutoTab));
+		selectedUsedAutoTab.shouldBe(Condition.visible);
 		return this;
 	}
 
@@ -104,7 +98,7 @@ public class CarLoans extends BasePage{
 	 * Select the country code from the drop down list
 	 */
 	public CarLoans selectCountryCountryRussiaFromList() {
-		driver.findElement(buttonCountryRussia).click();
+		buttonCountryRussia.shouldBe(Condition.visible).click();
 		return this;
 	}
 }

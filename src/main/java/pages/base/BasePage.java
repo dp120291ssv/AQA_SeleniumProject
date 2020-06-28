@@ -23,7 +23,7 @@ public class BasePage {
 	 */
 	protected void clearAndType(SelenideElement element, String value){
 		while (!element.getAttribute("value").equals("")) element.sendKeys(Keys.BACK_SPACE);
-		element.sendKeys(value);
+		element.setValue(value);
 	}
 
 	/**
