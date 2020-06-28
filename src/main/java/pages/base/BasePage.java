@@ -3,8 +3,9 @@ package pages.base;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class BasePage {
 
@@ -31,5 +32,9 @@ public class BasePage {
 	 */
 	public void checkIsDisplayedAuthWidget(){
 		authWidgetP24New.shouldBe(Condition.visible);
+	}
+
+	public void checkMessage(String message){
+		$(byText(message)).shouldBe(Condition.visible);
 	}
 }

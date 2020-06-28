@@ -2,12 +2,7 @@ package pages.telecommunication;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.base.BasePage;
-
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MobilePhoneReplenishment extends BasePage {
@@ -18,12 +13,12 @@ public class MobilePhoneReplenishment extends BasePage {
 	private final SelenideElement inputCardExpDate = $x("//input[@data-qa-node='expiredebitSource']");
 	private final SelenideElement inputCardCvv = $x("//input[@data-qa-node='cvvdebitSource']");
 	private final SelenideElement buttonSubmitPayment = $x("//button[@data-qa-node='submit']");
-	private final SelenideElement cardNumberInTheCart = $x("//td[@data-qa-node='card']");
-	private final SelenideElement recipientNameInTheCart = $x("//span[@data-qa-node='nameB']");
-	private final SelenideElement amountInTheCart = $x("//span[@data-qa-node='amount']");
-	private final SelenideElement commissionInTheCart = $x("//span[@data-qa-node='commission']");
-	private final SelenideElement amountCurrencyInTheCard = $x("//small[@data-qa-node='currency']");
-	private final SelenideElement commissionCurrencyInTheCard = $x("//small[@data-qa-node='commission-currency']");
+//	private final SelenideElement cardNumberInTheCart = $x("//td[@data-qa-node='card']");
+//	private final SelenideElement recipientNameInTheCart = $x("//span[@data-qa-node='nameB']");
+//	private final SelenideElement amountInTheCart = $x("//span[@data-qa-node='amount']");
+//	private final SelenideElement commissionInTheCart = $x("//span[@data-qa-node='commission']");
+//	private final SelenideElement amountCurrencyInTheCard = $x("//small[@data-qa-node='currency']");
+//	private final SelenideElement commissionCurrencyInTheCard = $x("//small[@data-qa-node='commission-currency']");
 	private final SelenideElement walletButton = $x("//div[@data-qa-node='debitSourceSource']");
 
 	/**
@@ -93,8 +88,8 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param recipient mobile operator
 	 */
 	public MobilePhoneReplenishment checkPaymentCardAndRecipient(String cardFrom, String recipient){
-		Assertions.assertEquals(cardNumberInTheCart.getText().split(" ")[3], cardFrom);
-		Assertions.assertEquals(recipientNameInTheCart.getText(), recipient);
+		checkMessage(cardFrom);
+		checkMessage(recipient);
 		return this;
 	}
 
@@ -104,8 +99,8 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param commission the commission in addition to mobile account
 	 */
 	public MobilePhoneReplenishment checkPaymentAmountAndCommission(String amount, String commission){
-		Assertions.assertEquals(waitElementIsVisible(driver.findElement(amountInTheCart)).getText(), amount);
-		Assertions.assertEquals(driver.findElement(commissionInTheCart).getText(), commission);
+		checkMessage(amount);
+		checkMessage(commission);
 		return this;
 	}
 
@@ -115,8 +110,8 @@ public class MobilePhoneReplenishment extends BasePage {
 	 * @param commissionAmount currency of fee
 	 */
 	public MobilePhoneReplenishment checkPaymentCurrency(String currencyAmount, String commissionAmount){
-		Assertions.assertEquals(waitElementIsVisible(driver.findElement(amountCurrencyInTheCard)).getText().split(" ")[1], currencyAmount);
-		Assertions.assertEquals(driver.findElement(commissionCurrencyInTheCard).getText().split(" ")[1], commissionAmount);
+		checkMessage(currencyAmount);
+		checkMessage(commissionAmount);
 		return this;
 	}
 }
