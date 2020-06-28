@@ -1,1 +1,1 @@
-# udemySeleniumCourse
+# udemySelenideCourse
