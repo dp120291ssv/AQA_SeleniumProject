@@ -39,7 +39,7 @@ public class AshotFirstTest {
 		ScreenshotUtils screenshotUtils = new ScreenshotUtils();
         BasePage basePage = new BasePage();
 
-        //переход на страницу
+		//переход на страницу
         basePage.goToURL("https://next.privat24.ua/mobile");
 
 		Thread.sleep(3000);
