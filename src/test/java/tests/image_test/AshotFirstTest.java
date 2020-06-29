@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static common.screenshot.ScreenshotUtils.getBytes;
 import static io.qameta.allure.Allure.label;
 
-public class FirstImageTest {
+public class AshotFirstTest {
 
     public static final SelenideElement amountField = $x("//input[@data-qa-node='amount']");
     public static final SelenideElement mobileReplenishmentForm = $x("//form[@method='post']");
@@ -57,11 +57,11 @@ public class FirstImageTest {
 //        screenshotUtils.write(actual.getImage(), FirstImageTest.class, "mobile");
 
         //вычитываем ОЖИДАЕМЫЙ результат
-        final BufferedImage expected = screenshotUtils.read(FirstImageTest.class, "mobile");
+        final BufferedImage expected = screenshotUtils.read(AshotFirstTest.class, "mobile");
 
         // сравниваем ОЖИДАЕМЫЙ и ФАКТИЧЕСКИЙ
         ImageDiff diff = new ImageDiffer().makeDiff(actual.getImage(), expected);
-        screenshotUtils.write(diff.getMarkedImage(), FirstImageTest.class, "diff");
+        screenshotUtils.write(diff.getMarkedImage(), AshotFirstTest.class, "diff");
 
         //Добавляем все три скрина
         addScreenshot("expected", expected);
