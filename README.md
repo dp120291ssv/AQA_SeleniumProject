@@ -1,1 +1,1 @@
-# udemySelenideCourse
+# Selenium Example Project
