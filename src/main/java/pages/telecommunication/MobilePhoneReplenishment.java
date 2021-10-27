@@ -8,9 +8,9 @@ import pages.base.BasePage;
 
 public class MobilePhoneReplenishment extends BasePage {
 
-	public MobilePhoneReplenishment(WebDriver driver) {
-		super(driver);
-	}
+//	public MobilePhoneReplenishment(WebDriver driver) {
+//		super(driver);
+//	}
 
 	private final By inputPhoneNumber = By.xpath("//input[@data-qa-node='phone-number']");
 	private final By inputAmount = By.xpath("//input[@data-qa-node='amount']");
